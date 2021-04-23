@@ -16,3 +16,6 @@ This is where the main app code is stored. Here, we set up:
 <li /> MapScreen: our map screen is the home screen. Here we have a map that we've gotten from the Google Maps API.
 <li /> Markers: from the Google Maps API, we use markers to mark our origin, destination, and the risk factor of each state.
 </ul>
+
+### lib/secrets.dart
+This is where we store the API keys for the APIs we've used. If pulling this code from GitHub, you must get your own key.
