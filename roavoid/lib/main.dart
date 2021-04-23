@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:roavoid/directions_model.dart';
 import 'package:roavoid/directions_repository.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:roavoid/SecondScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Google Maps',
+      title: 'Roavoid',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.white,
@@ -37,6 +38,8 @@ class _MapScreenState extends State<MapScreen> {
   Marker _destination;
   Directions _info;
 
+  int _selectedIndex = 0;
+
   @override
   void dispose() {
     _googleMapController.dispose();
@@ -48,7 +51,7 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: const Text('Google Maps'),
+        title: const Text('Roavoid'),
         actions: [
           if (_origin != null)
             TextButton(
@@ -150,6 +153,26 @@ class _MapScreenState extends State<MapScreen> {
               : CameraUpdate.newCameraPosition(_initialCameraPosition),
         ),
         child: const Icon(Icons.center_focus_strong),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        backgroundColor: Colors.blue,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map),
+            label: 'Map',
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+        ],
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+            if (_selectedIndex == 1) {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SecondScreen()));
+            }
+          });
+        },
       ),
     );
   }
