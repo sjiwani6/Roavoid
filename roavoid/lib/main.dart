@@ -8,6 +8,7 @@ void main() {
   runApp(MyApp());
 }
 
+// Made a class structure for the states to save relevant info
 class US_State {
   final String abbreviation;
   final String name;
@@ -45,14 +46,17 @@ class _MapScreenState extends State<MapScreen> {
     zoom: 5,
   );
 
+  // Relevant definitions
   GoogleMapController _googleMapController;
   Marker _origin;
   Marker _destination;
-  List<Marker> stateMarkers = [];
   Directions _info;
 
   int _selectedIndex = 0;
 
+  //Couldn't do successful API calls so currently hard coding
+  //the risk factors for each individual state
+  List<Marker> stateMarkers = [];
   List<US_State> states = [];
   void populate_states() {
     states.add(new US_State(
@@ -548,6 +552,7 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   void _addMarker(LatLng pos) async {
+    // this is used to set up the origin and destination marks
     if (_origin == null || (_origin != null && _destination != null)) {
       // Origin is not set OR Origin/Destination are both set
       // Set origin
